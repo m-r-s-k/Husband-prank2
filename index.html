@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System Update</title>
     <style>
         body {
@@ -138,6 +140,7 @@
             }
         }
         
+        // SINGLE setInterval function (the issue was a duplicate)
         const update = setInterval(() => {
             // SLOWER PROGRESS - Longer runtime
             progress += Math.floor(Math.random() * 2) + 1; // 1-3% increments
@@ -165,33 +168,6 @@
                 }, 2000);
             }
         }, 1200); // SLOWER: 1200ms between updates
-        const update = setInterval(() => {
-    // SLOWER PROGRESS - Longer runtime
-    progress += Math.floor(Math.random() * 2) + 1; // 1-3% increments
-    if (progress > 100) progress = 100;
-    
-    progressBar.style.width = progress + '%';
-    percentage.textContent = Math.floor(progress) + '%';
-    
-    // Update main status message with longer timing
-    updateStatus();
-    
-    // Update sub status occasionally
-    if (progress % 15 < 2) {
-        subStatus.textContent = subMessages[Math.floor(Math.random() * subMessages.length)];
-    }
-    
-    if (progress >= 100) {
-        clearInterval(update);
-        setTimeout(() => {
-            status.textContent = "Update complete!";
-            subStatus.textContent = "Your husband is now optimized for maximum awesomeness! 💕";
-            subStatus.style.fontSize = "28px";
-            subStatus.style.fontWeight = "400";
-            progressBar.style.background = '#3DDC84';
-        }, 2000);
-    }
-}, 1200); // ← THIS IS THE KEY LINE: 1200ms between updates
         
         messageStartTime = Date.now();
     </script>
