@@ -8,44 +8,48 @@
             color: #00FF00;
             font-family: 'Courier New', monospace;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            font-size: 28px; /* Bigger base font */
         }
         .terminal-header {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 36px; /* Larger header */
+            margin-bottom: 30px;
             color: #FF6B00;
+            font-weight: bold;
         }
         .progress-container {
             width: 80%;
             background: #1A1A1A;
-            border: 2px solid #00FF00;
+            border: 3px solid #00FF00; /* Thicker border */
             border-radius: 5px;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         .progress-bar {
             width: 0%;
-            height: 30px;
+            height: 40px; /* Thicker bar */
             background: #FF6B00;
             transition: width 0.5s ease;
         }
         .percentage {
-            font-size: 24px;
-            margin: 10px 0;
+            font-size: 32px; /* Larger percentage */
+            margin: 15px 0;
             font-weight: bold;
         }
         .status {
-            font-size: 16px;
-            margin: 10px 0;
-            min-height: 20px;
+            font-size: 24px; /* Bigger status text */
+            margin: 15px 0;
+            min-height: 30px;
+            font-weight: bold;
         }
         .blink {
             animation: blink 1s infinite;
+            font-size: 30px;
         }
         @keyframes blink {
             50% { opacity: 0; }
@@ -58,7 +62,7 @@
         <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="percentage" id="percentage">5% complete</div>
-    <div class="status" id="status">Initializing nap optimization module...</div>
+    <div class="status" id="status">Initializing night owl protocol...</div>
     <div class="status">█<span class="blink">_</span></div>
 
     <script>
@@ -68,18 +72,18 @@
         const status = document.getElementById('status');
         
         const messages = [
-            "Defragging couch cushion memory allocation",
-            "Optimizing grumpy morning protocol",
-            "Downloading new video game achievement patches",
-            "Calibrating snore decibel limiter (bypassing...)",
-            "Installing collector's edition DLC compatibility",
-            "Updating 'I was just resting my eyes' firmware",
-            "Optimizing controller grip for maximum comfort",
-            "Installing selective hearing hotfix",
-            "Patch: Fixed 'where's the remote?' bug",
-            "Adding support for 4th nap of the day",
-            "Optimizing '5 more minutes' algorithm",
-            "Installing anti-early-bedtime firewall"
+            "Optimizing 2AM gaming session endurance",
+            "Calibrating 'one more level' tolerance",
+            "Downloading midnight snack navigation system",
+            "Installing caffeine metabolism upgrade",
+            "Patch: Extended 'just 5 more minutes' to 3 hours",
+            "Optimizing dark mode eye comfort settings",
+            "Updating late-night controller reflexes",
+            "Installing anti-early-bedtime firewall (reinforced)",
+            "Calibrating snore volume for optimal sleep avoidance",
+            "Optimizing couch-to-bed migration algorithm",
+            "Installing 'yawning is just stretching' module",
+            "Patch: Fixed 'I'm not tired' detection system"
         ];
         
         const update = setInterval(() => {
