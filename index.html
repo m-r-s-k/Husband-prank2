@@ -1,110 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>System Update</title>
+    <title>Windows Update</title>
     <style>
-    body {
-        background: #2D2D2D;
-        color: #00FF00;
-        font-family: 'Courier New', monospace;
-        margin: 0;
-        padding: 30px;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .terminal-header {
-        font-size: 48px; /* LARGE */
-        margin-bottom: 40px;
-        color: #FF6B00;
-        font-weight: bold;
-        /* text-transform: uppercase; REMOVED */
-        letter-spacing: 2px;
-    }
-    .progress-container {
-        width: 90%;
-        background: #1A1A1A;
-        border: 4px solid #00FF00;
-        border-radius: 8px;
-        margin: 40px 0;
-    }
-    .progress-bar {
-        width: 0%;
-        height: 50px; /* EXTRA THICK */
-        background: #FF6B00;
-        transition: width 0.5s ease;
-    }
-    .percentage {
-        font-size: 42px; /* VERY LARGE */
-        margin: 25px 0;
-        font-weight: bold;
-        color: #FFFFFF;
-    }
-    .status {
-        font-size: 32px; /* LARGE */
-        margin: 25px 0;
-        min-height: 40px;
-        font-weight: bold;
-        line-height: 1.3;
-        transition: opacity 0.5s ease;
-    }
-    .blink {
-        animation: blink 1s infinite;
-        font-size: 36px;
-    }
-    .high-contrast {
-        text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00;
-    }
-    @keyframes blink {
-        50% { opacity: 0; }
-    }
+        body {
+            background: linear-gradient(135deg, #0078D7 0%, #005A9E 100%);
+            color: white;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 40px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .windows-logo {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+        .update-header {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .progress-container {
+            width: 80%;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            margin: 40px 0;
+            overflow: hidden;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 60px;
+            background: linear-gradient(90deg, #00BCF2 0%, #0078D7 100%);
+            transition: width 0.8s ease;
+            border-radius: 15px;
+        }
+        .percentage {
+            font-size: 48px;
+            margin: 30px 0;
+            font-weight: 200;
+        }
+        .status {
+            font-size: 32px;
+            margin: 25px 0;
+            min-height: 40px;
+            font-weight: 300;
+            line-height: 1.4;
+            transition: opacity 0.5s ease;
+        }
+        .sub-status {
+            font-size: 24px;
+            margin: 15px 0;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .warning {
+            font-size: 20px;
+            margin-top: 40px;
+            opacity: 0.9;
+        }
     </style>
-    
 </head>
 <body>
-    <div class="terminal-header high-contrast">HusbandOS v2.5 Update</div>
+    <div class="windows-logo"></div>
+    <div class="update-header">HusbandOS Update</div>
+    <div class="status" id="status">Getting things ready...</div>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div class="percentage high-contrast" id="percentage">5% complete</div>
-    <div class="status high-contrast" id="status">Initializing night owl protocol...</div>
-    <div class="status">█<span class="blink">_</span></div>
-    
-<script>
-        let progress = 5;
+    <div class="percentage" id="percentage">0%</div>
+    <div class="sub-status" id="subStatus">This may take several minutes</div>
+    <div class="warning">Please keep your computer on and connected to power</div>
+
+    <script>
+        let progress = 0;
         const progressBar = document.getElementById('progressBar');
         const percentage = document.getElementById('percentage');
         const status = document.getElementById('status');
+        const subStatus = document.getElementById('subStatus');
         
         const messages = [
             "Optimizing 2AM gaming session endurance",
             "Calibrating 'one more level' tolerance",
             "Downloading midnight snack navigation system",
             "Installing caffeine metabolism upgrade",
-            "Patch: Extended 'just 5 more minutes' to 3 hours",
+            "Extending 'just 5 more minutes' to 3 hours",
             "Optimizing dark mode eye comfort settings",
             "Updating late-night controller reflexes",
-            "Installing anti-early-bedtime firewall (reinforced)",
+            "Installing anti-early-bedtime firewall",
             "Calibrating snore volume for optimal sleep avoidance",
             "Optimizing couch-to-bed migration algorithm",
             "Installing 'yawning is just stretching' module",
-            "Patch: Fixed 'I'm not tired' detection system",
+            "Fixing 'I'm not tired' detection system",
             "Loading extended cutscene skip functionality",
             "Optimizing controller battery conservation",
             "Installing automatic snack refill detection",
-            "Updating 'I was just resting my eyes' protocol",
-            "Calibrating perfect couch recline angles",
-            "Installing game achievement tracker v2.0"
+            "Updating 'I was just resting my eyes' protocol"
         ];
         
-        // Track current message and timing
+        const subMessages = [
+            "Installing update 1 of 16...",
+            "This might take several minutes",
+            "Working on updates...",
+            "Don't turn off your computer",
+            "Almost there...",
+            "Finalizing updates..."
+        ];
+        
+        // LONGER TIMING SETTINGS
         let currentMessageIndex = 0;
-        let messageStartTime = 0;
-        const minMessageDuration = 5000; // 5 seconds minimum per message
-        const maxMessageDuration = 8000; // 8 seconds maximum per message
+        let messageStartTime = Date.now();
+        const minMessageDuration = 5000; // 5 seconds minimum
+        const maxMessageDuration = 8000; // 8 seconds maximum
         
         function updateStatus() {
             const now = Date.now();
@@ -124,33 +135,40 @@
                         status.textContent = messages[currentMessageIndex];
                         status.style.opacity = '1';
                         messageStartTime = Date.now();
-                    }, 500); // Fade out/in duration
+                    }, 500);
                 }
             }
         }
         
         const update = setInterval(() => {
-            progress += Math.floor(Math.random() * 2) + 1; // Slower progress
+            // SLOWER PROGRESS - Longer runtime
+            progress += Math.floor(Math.random() * 2) + 1; // 1-3% increments
             if (progress > 100) progress = 100;
             
             progressBar.style.width = progress + '%';
-            percentage.textContent = progress + '% complete';
+            percentage.textContent = Math.floor(progress) + '%';
             
-            // Update status message timing
+            // Update main status message with longer timing
             updateStatus();
+            
+            // Update sub status occasionally
+            if (progress % 15 < 2) {
+                subStatus.textContent = subMessages[Math.floor(Math.random() * subMessages.length)];
+            }
             
             if (progress >= 100) {
                 clearInterval(update);
                 setTimeout(() => {
-                    status.textContent = "UPDATE COMPLETE: Still the best husband! 💕";
-                    status.style.color = "#FF6B00";
-                    progressBar.style.background = '#00FF00';
-                }, 1000);
+                    status.textContent = "Update complete!";
+                    subStatus.textContent = "Your husband is now optimized for maximum awesomeness! 💕";
+                    subStatus.style.fontSize = "28px";
+                    subStatus.style.fontWeight = "400";
+                    progressBar.style.background = '#107C10';
+                }, 2000);
             }
-        }, 1200); // Much slower progress (1200ms = 1.2 seconds per update)
+        }, 1200); // SLOWER: 1200ms between updates
         
-        // Initialize first message
         messageStartTime = Date.now();
-</script>
+    </script>
 </body>
 </html>
