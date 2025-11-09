@@ -4,9 +4,9 @@
     <title>System Update</title>
     <style>
         body {
-            background: linear-gradient(135deg, #0078D7 0%, #005A9E 100%);
-            color: white;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #000000;
+            color: #FFFFFF;
+            font-family: 'Roboto', system-ui, sans-serif;
             margin: 0;
             padding: 40px;
             height: 100vh;
@@ -16,7 +16,7 @@
             align-items: center;
             text-align: center;
         }
-        .windows-logo {
+        .android-logo {
             font-size: 80px;
             margin-bottom: 30px;
         }
@@ -24,25 +24,28 @@
             font-size: 42px;
             margin-bottom: 20px;
             font-weight: 300;
+            color: #3DDC84; /* Android green */
         }
         .progress-container {
             width: 80%;
-            background: rgba(255,255,255,0.2);
-            border-radius: 15px;
+            background: #2A2A2A;
+            border-radius: 25px;
             margin: 40px 0;
             overflow: hidden;
+            height: 20px;
         }
         .progress-bar {
             width: 0%;
-            height: 60px;
-            background: linear-gradient(90deg, #00BCF2 0%, #0078D7 100%);
+            height: 100%;
+            background: #3DDC84; /* Android green */
             transition: width 0.8s ease;
-            border-radius: 15px;
+            border-radius: 25px;
         }
         .percentage {
             font-size: 48px;
             margin: 30px 0;
             font-weight: 200;
+            color: #3DDC84;
         }
         .status {
             font-size: 32px;
@@ -57,24 +60,19 @@
             margin: 15px 0;
             opacity: 0.8;
             font-weight: 300;
-        }
-        .warning {
-            font-size: 20px;
-            margin-top: 40px;
-            opacity: 0.9;
+            color: #CCCCCC;
         }
     </style>
 </head>
 <body>
-    <div class="windows-logo"></div>
-    <div class="update-header">HusbandOS Update</div>
-    <div class="status" id="status">Getting things ready...</div>
+    <div class="android-logo">🤖</div>
+    <div class="update-header">HusbandOS System Update</div>
+    <div class="status" id="status">Preparing update...</div>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="percentage" id="percentage">0%</div>
-    <div class="sub-status" id="subStatus">This may take several minutes</div>
-    <div class="warning">Please keep your computer on and connected to power</div>
+    <div class="sub-status" id="subStatus">Do not turn off the device</div>
 
     <script>
         let progress = 0;
@@ -103,12 +101,12 @@
         ];
         
         const subMessages = [
-            "Installing update 1 of 16...",
-            "This might take several minutes",
-            "Working on updates...",
-            "Don't turn off your computer",
-            "Almost there...",
-            "Finalizing updates..."
+            "Installing update...",
+            "Optimizing system performance",
+            "This may take several minutes",
+            "Do not power off",
+            "Almost complete...",
+            "Finalizing installation"
         ];
         
         // LONGER TIMING SETTINGS
@@ -163,10 +161,37 @@
                     subStatus.textContent = "Your husband is now optimized for maximum awesomeness! 💕";
                     subStatus.style.fontSize = "28px";
                     subStatus.style.fontWeight = "400";
-                    progressBar.style.background = '#107C10';
+                    progressBar.style.background = '#3DDC84';
                 }, 2000);
             }
         }, 1200); // SLOWER: 1200ms between updates
+        const update = setInterval(() => {
+    // SLOWER PROGRESS - Longer runtime
+    progress += Math.floor(Math.random() * 2) + 1; // 1-3% increments
+    if (progress > 100) progress = 100;
+    
+    progressBar.style.width = progress + '%';
+    percentage.textContent = Math.floor(progress) + '%';
+    
+    // Update main status message with longer timing
+    updateStatus();
+    
+    // Update sub status occasionally
+    if (progress % 15 < 2) {
+        subStatus.textContent = subMessages[Math.floor(Math.random() * subMessages.length)];
+    }
+    
+    if (progress >= 100) {
+        clearInterval(update);
+        setTimeout(() => {
+            status.textContent = "Update complete!";
+            subStatus.textContent = "Your husband is now optimized for maximum awesomeness! 💕";
+            subStatus.style.fontSize = "28px";
+            subStatus.style.fontWeight = "400";
+            progressBar.style.background = '#3DDC84';
+        }, 2000);
+    }
+}, 1200); // ← THIS IS THE KEY LINE: 1200ms between updates
         
         messageStartTime = Date.now();
     </script>
