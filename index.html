@@ -3,64 +3,66 @@
 <head>
     <title>System Update</title>
     <style>
-        body {
-            background: #2D2D2D;
-            color: #00FF00;
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 30px;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .terminal-header {
-            font-size: 48px;
-            margin-bottom: 40px;
-            color: #FF6B00;
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-        .progress-container {
-            width: 90%;
-            background: #1A1A1A;
-            border: 4px solid #00FF00;
-            border-radius: 8px;
-            margin: 40px 0;
-        }
-        .progress-bar {
-            width: 0%;
-            height: 50px;
-            background: #FF6B00;
-            transition: width 0.5s ease;
-        }
-        .percentage {
-            font-size: 42px;
-            margin: 25px 0;
-            font-weight: bold;
-            color: #FFFFFF;
-        }
-        .status {
-            font-size: 32px;
-            margin: 25px 0;
-            min-height: 40px;
-            font-weight: bold;
-            line-height: 1.3;
-            transition: opacity 0.5s ease;
-        }
-        .blink {
-            animation: blink 1s infinite;
-            font-size: 36px;
-        }
-        .high-contrast {
-            text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+    body {
+        background: #2D2D2D;
+        color: #00FF00;
+        font-family: 'Courier New', monospace;
+        margin: 0;
+        padding: 30px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .terminal-header {
+        font-size: 48px; /* LARGE */
+        margin-bottom: 40px;
+        color: #FF6B00;
+        font-weight: bold;
+        /* text-transform: uppercase; REMOVED */
+        letter-spacing: 2px;
+    }
+    .progress-container {
+        width: 90%;
+        background: #1A1A1A;
+        border: 4px solid #00FF00;
+        border-radius: 8px;
+        margin: 40px 0;
+    }
+    .progress-bar {
+        width: 0%;
+        height: 50px; /* EXTRA THICK */
+        background: #FF6B00;
+        transition: width 0.5s ease;
+    }
+    .percentage {
+        font-size: 42px; /* VERY LARGE */
+        margin: 25px 0;
+        font-weight: bold;
+        color: #FFFFFF;
+    }
+    .status {
+        font-size: 32px; /* LARGE */
+        margin: 25px 0;
+        min-height: 40px;
+        font-weight: bold;
+        line-height: 1.3;
+        transition: opacity 0.5s ease;
+    }
+    .blink {
+        animation: blink 1s infinite;
+        font-size: 36px;
+    }
+    .high-contrast {
+        text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
     </style>
+    
 </head>
 <body>
     <div class="terminal-header high-contrast">HusbandOS v2.5 Update</div>
