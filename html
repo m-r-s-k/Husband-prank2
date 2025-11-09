@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Update</title>
+    <style>
+        body {
+            background: #2D2D2D;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .terminal-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #FF6B00;
+        }
+        .progress-container {
+            width: 80%;
+            background: #1A1A1A;
+            border: 2px solid #00FF00;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background: #FF6B00;
+            transition: width 0.5s ease;
+        }
+        .percentage {
+            font-size: 24px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .status {
+            font-size: 16px;
+            margin: 10px 0;
+            min-height: 20px;
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-header">HusbandOS v2.5 Update</div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="percentage" id="percentage">5% complete</div>
+    <div class="status" id="status">Initializing nap optimization module...</div>
+    <div class="status">█<span class="blink">_</span></div>
+
+    <script>
+        let progress = 5;
+        const progressBar = document.getElementById('progressBar');
+        const percentage = document.getElementById('percentage');
+        const status = document.getElementById('status');
+        
+        const messages = [
+            "Defragging couch cushion memory allocation",
+            "Optimizing grumpy morning protocol",
+            "Downloading new video game achievement patches",
+            "Calibrating snore decibel limiter (bypassing...)",
+            "Installing collector's edition DLC compatibility",
+            "Updating 'I was just resting my eyes' firmware",
+            "Optimizing controller grip for maximum comfort",
+            "Installing selective hearing hotfix",
+            "Patch: Fixed 'where's the remote?' bug",
+            "Adding support for 4th nap of the day",
+            "Optimizing '5 more minutes' algorithm",
+            "Installing anti-early-bedtime firewall"
+        ];
+        
+        const update = setInterval(() => {
+            progress += Math.floor(Math.random() * 4) + 1;
+            if (progress > 100) progress = 100;
+            
+            progressBar.style.width = progress + '%';
+            percentage.textContent = progress + '% complete';
+            
+            if (progress % 8 === 0) {
+                status.textContent = messages[Math.floor(Math.random() * messages.length)];
+            }
+            
+            if (progress >= 100) {
+                clearInterval(update);
+                setTimeout(() => {
+                    status.textContent = "UPDATE COMPLETE: Still the best husband! 💕";
+                    status.style.color = "#FF6B00";
+                    progressBar.style.background = '#00FF00';
+                }, 1000);
+            }
+        }, 700);
+    </script>
+</body>
+</html>
